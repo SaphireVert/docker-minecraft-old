@@ -1,23 +1,29 @@
+check-env:
+ifeq ($(wildcard .env),)
+	@echo "Please create your .env file first, from .env_sample"
+	@exit 1
+else
 include .env
+endif
 
-build:
+build: check-env
 	docker build --build-arg REV=${REV} -t ${DH_USER}/${IMG_PREFIX}spigot .
 
-force-build:
+force-build: check-env
 	docker build --no-cache --build-arg REV=${REV} -t ${DH_USER}/${IMG_PREFIX}spigot .
 
-cp-spigot: build
+cp-spigot: check-env build
 	docker create --rm -ti --name tmpcntr ${DH_USER}/${IMG_PREFIX}spigot bash
 	docker cp tmpcntr:/spigotdir/spigot-${REV}.jar .
 	docker rm -f tmpcntr
 
-run:
+run: check-env
 	docker run -it ${DH_USER}/${IMG_PREFIX}spigot
 
-exec:
+exec: check-env
 	docker exec -it ${DH_USER}/${IMG_PREFIX}spigot /bin/bash
 
-testArg:
+testArg: check-env
 	@echo ${REV}
 	@echo "Using the default value in Dockerfile ARG"
 	docker build --no-cache -t ${DH_USER}/test -f test/Dockerfiletest .
