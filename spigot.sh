@@ -13,4 +13,4 @@ else
   fi
 fi
 
-java -jar -Xms256M -Xmx1G spigot.jar
+java -jar -Xms$XMS -Xmx$XMX spigot.jar

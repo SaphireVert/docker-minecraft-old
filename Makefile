@@ -19,10 +19,13 @@ cp-spigot: check-env build
 	docker rm -f tmpcntr
 
 run: check-env
-	docker run -e EULA=true -it ${DH_USER}/${IMG_PREFIX}spigot 
+	docker run -e EULA=true -it ${DH_USER}/${IMG_PREFIX}spigot
 
 exec: check-env
 	docker exec -it ${DH_USER}/${IMG_PREFIX}spigot /bin/bash
+
+push:
+	docker push ${DH_USER}/${IMG_PREFIX}spigot:latest
 
 testArg: check-env
 	@echo ${REV}
