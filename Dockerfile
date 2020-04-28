@@ -33,8 +33,12 @@ RUN apt install -y \
     git \
     openjdk-11-jdk \
     wget
+RUN apt clean && apt autoremove
 WORKDIR /spigotdir
 COPY --from=spigotbuild /spigotdir/spigot-*.jar .
 RUN ln -s spigot-$REV.jar spigot.jar
+ADD ./spigot.sh /spigot.sh
+RUN chmod +x /spigot.sh
 RUN ls -al
-CMD ["java", "-jar", "-Xms256M", "-Xmx1G", "spigot.jar"]
+CMD ["/spigot.sh"]
+# CMD ["java", "-jar", "-Xms256M", "-Xmx1G", "spigot.jar"]
