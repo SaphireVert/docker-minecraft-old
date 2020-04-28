@@ -15,7 +15,7 @@ force-build: check-env
 
 cp-spigot: check-env build
 	docker create --rm -ti --name tmpcntr ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot bash
-	docker cp tmpcntr:/spigotdir/spigot-${REV}.jar .
+	docker cp tmpcntr:${$SPIGOTDIR}/spigot-${REV}.jar .
 	docker rm -f tmpcntr
 
 run: check-env
