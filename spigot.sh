@@ -7,7 +7,7 @@ if [ -e $EULA ]; then
 else
   if [ "$EULA" = "true" ]; then
     echo "Accepting the EULA"
-    echo "eula=true" > /spigotdir/eula.txt
+    echo "eula=true" > $SPIGOTDIR/eula.txt
   else
     echo "Please accept the EULA"
   fi

@@ -4,8 +4,9 @@ services:
     image: "${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:${REV}"
     ports:
       - "25565:25565"
-    volumes:
-      - ${PWD}:/serverdir
+    # This has to be smarter, e.g. mount each file and sub-directories
+    # volumes:
+    #   - ${PWD}/data:${SPIGOTDIR}
     environment:
       - EULA=true
       - XMS=${XMS}
