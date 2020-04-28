@@ -28,11 +28,14 @@ RUN java -jar BuildTools.jar --rev $REV
 
 # Second stage
 FROM ubuntu:20.04
-
 ARG REV
 ARG SPIGOTDIR
+ARG XMS
+ARG XMX
 ENV REG $REV
 ENV SPIGOTDIR $SPIGOTDIR
+ENV XMS $XMS
+ENV XMX $XMX
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Europe/Zurich
 

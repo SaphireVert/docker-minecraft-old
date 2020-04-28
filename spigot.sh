@@ -13,4 +13,16 @@ else
   fi
 fi
 
+# Fallback default param
+if [ -e $XMS ]; then
+  XMS=1G
+fi
+if [ -e $XMX ]; then
+  XMX=1G
+fi
+
+cd $SPIGOTDIR
+ls -al
+pwd
+echo "java -jar -Xms$XMS -Xmx$XMX spigot.jar"
 java -jar -Xms$XMS -Xmx$XMX spigot.jar
