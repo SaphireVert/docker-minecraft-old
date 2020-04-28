@@ -5,8 +5,11 @@ services:
     ports:
       - "25565:25565"
     # This has to be smarter, e.g. mount each file and sub-directories
-    # volumes:
-    #   - ${PWD}/data:${SPIGOTDIR}
+    volumes:
+      - ${PWD}/data:${SPIGOTDIR}/data
+      #- ${PWD}/data/server.properties:${SPIGOTDIR}/data/server.properties
+      - ${PWD}/data/plugins:${SPIGOTDIR}/data/plugins
+      - ${PWD}/data/worlds:${SPIGOTDIR}/data/worlds
     environment:
       - EULA=true
       - XMS=${XMS}

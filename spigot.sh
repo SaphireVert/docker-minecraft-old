@@ -24,5 +24,8 @@ fi
 cd $SPIGOTDIR
 ls -al
 pwd
-echo "java -jar -Xms$XMS -Xmx$XMX spigot.jar"
-java -jar -Xms$XMS -Xmx$XMX spigot.jar
+echo "java -jar -Xms$XMS -Xmx$XMX spigot.jar -c $SPIGOTDIR/data/server.properties -P $SPIGOTDIR/data/plugins -W $SPIGOTDIR/data/worlds"
+java -jar -Xms$XMS -Xmx$XMX spigot.jar \
+  -c $SPIGOTDIR/data/server.properties \
+  -P $SPIGOTDIR/data/plugins \
+  -W $SPIGOTDIR/data/worlds
