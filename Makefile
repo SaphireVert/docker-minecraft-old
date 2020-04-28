@@ -8,6 +8,7 @@ endif
 
 build: check-env
 	docker build --build-arg REV=${REV} -t ${DH_USER}/${IMG_PREFIX}spigot .
+	docker tag ${DH_USER}/${IMG_PREFIX}spigot:latest ${DH_USER}/${IMG_PREFIX}spigot:${REV}
 
 force-build: check-env
 	docker build --no-cache --build-arg REV=${REV} -t ${DH_USER}/${IMG_PREFIX}spigot .
@@ -18,7 +19,7 @@ cp-spigot: check-env build
 	docker rm -f tmpcntr
 
 run: check-env
-	docker run -it ${DH_USER}/${IMG_PREFIX}spigot
+	docker run -e EULA=true -it ${DH_USER}/${IMG_PREFIX}spigot 
 
 exec: check-env
 	docker exec -it ${DH_USER}/${IMG_PREFIX}spigot /bin/bash
