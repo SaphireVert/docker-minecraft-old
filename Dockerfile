@@ -1,13 +1,13 @@
-ARG REV=1.15.2
+# Set the default REV value
+ARG REV=latest
 
 # Take ubuntu 20.04 as base image and set stagename as spigotbuild
 FROM ubuntu:20.04 AS spigotbuild
+# Use the REV specified by --build-arg if present, otherwise take the default
 ARG REV
-ENV REV $REV
+RUN echo "Building spigot for rev=$REV"
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Europe/Zurich
-
-
 RUN apt update -y && \
     apt upgrade -y
 RUN apt install -y \
@@ -23,6 +23,7 @@ RUN java -jar BuildTools.jar --rev $REV
 
 FROM ubuntu:20.04
 ARG REV
+ENV REG $REV
 RUN echo $REV
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Europe/Zurich

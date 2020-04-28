@@ -1,11 +1,21 @@
 include .env
 
 build:
-		docker build -t saphirevert/testdockerspigot .
+	docker build --build-arg REV=${REV} -t ${DH_USER}/${IMG_PREFIX}spigot .
+
+force-build:
+	docker build --no-cache --build-arg REV=${REV} -t ${DH_USER}/${IMG_PREFIX}spigot .
+
+cp-spigot: build
+	docker create --rm -ti --name tmpcntr ${DH_USER}/${IMG_PREFIX}spigot bash
+	docker cp tmpcntr:/spigotdir/spigot-${REV}.jar .
+	docker rm -f tmpcntr
+
 run:
-		docker run -it saphirevert/testdockerspigot
+	docker run -it ${DH_USER}/${IMG_PREFIX}spigot
+
 exec:
-		docker exec -it saphirevert/testdockerspigot /bin/bash
+	docker exec -it ${DH_USER}/${IMG_PREFIX}spigot /bin/bash
 
 testArg:
 	@echo ${REV}
