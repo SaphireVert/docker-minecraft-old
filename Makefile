@@ -6,6 +6,12 @@ else
 include .env
 endif
 
+up:
+	docker-compose up
+
+up-d:
+	docker-compose up -d
+
 build: check-env
 	docker build --build-arg REV=${REV} -t ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot .
 	docker tag ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:latest ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:${REV}

@@ -52,6 +52,7 @@ COPY --from=spigotbuild $SPIGOTDIR/spigot-*.jar .
 RUN ln -s spigot-$REV.jar spigot.jar
 ADD ./spigot.sh /spigot.sh
 RUN chmod +x /spigot.sh
+RUN wget http://ci.onarandombox.com/job/Multiverse-Core/lastBuild/artifact/target/Multiverse-Core-4.1.1-SNAPSHOT.jar -P /install/
 
 EXPOSE 25565
 EXPOSE 8123

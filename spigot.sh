@@ -24,6 +24,10 @@ fi
 cd $SPIGOTDIR
 ls -al
 pwd
+
+#Install plugin multiverse
+mv /install/*.jar $SPIGOTDIR/data/plugins
+
 echo "java -jar -Xms$XMS -Xmx$XMX spigot.jar -c $SPIGOTDIR/data/server.properties -P $SPIGOTDIR/data/plugins -W $SPIGOTDIR/data/worlds"
 java -jar -Xms$XMS -Xmx$XMX spigot.jar \
   -c $SPIGOTDIR/data/server.properties \
