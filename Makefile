@@ -6,6 +6,17 @@ else
 include .env
 endif
 
+reset: check-env
+	$(MAKE) clean
+	$(MAKE) build
+	$(MAKE) up
+
+clean:
+	sudo rm -rf data/*
+
+inside:
+	docker-compose run spigot /bin/bash
+
 up:
 	docker-compose up
 
@@ -30,5 +41,5 @@ run: check-env
 exec: check-env
 	docker exec -it ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot /bin/bash
 
-push:
+push: check-env
 	docker push ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:latest
