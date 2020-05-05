@@ -1,3 +1,4 @@
 .env
 spigot-*.jar
 data/*
+test.sh

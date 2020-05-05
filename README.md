@@ -11,8 +11,8 @@ Héberger des serveurs Minecraft chez un prestataire spécialisé c'est bien, le
 - [x] Makefile: push image
 - [x] Finish docker-compose file,
 - [x] Add env variable in docker-compose file for /spigot.sh
-- [ ] Ne pas redownloader spigot si déjà downloadé
-- [ ] Option pour force download
-- [ ] Pouvoir taper commandes dans la console du serveur
+- [x] Ne pas redownloader plugin si déjà downloadé
+- [x] Option pour force download
+- [x] Trouver qui a la priorité pour les variables d'environnement entre .env, docker-compose up et le makefile (avec motd par exemple)
 - [ ] Pouvoir set les propriétés de server.properties dans .env
-- [ ] Trouver qui a la priorité pour les variables d'env entre .env, docker-compose up et le makefile (avec motd)
+- [ ] Pouvoir taper commandes dans la console du serveur
