@@ -1,5 +1,5 @@
 # Set the default REV value
-ARG REV=latest
+#ARG REV=latest
 # Set the default installation dir
 ARG SPIGOTDIR=/minecraft
 
@@ -8,6 +8,8 @@ FROM ubuntu:20.04 AS spigotbuild
 # Use the REV specified by --build-arg if present, otherwise take the default
 ARG REV
 ARG SPIGOTDIR
+ARG FORCE_DOWNLOAD_SPIGOT
+# if [ FORCE_DOWNLOAD_SPIGOT=true or ]
 RUN echo "Building spigot for rev=$REV"
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Europe/Zurich
@@ -32,7 +34,7 @@ ARG REV
 ARG SPIGOTDIR
 ARG XMS
 ARG XMX
-ENV REG $REV
+ENV REV $REV
 ENV SPIGOTDIR $SPIGOTDIR
 ENV XMS $XMS
 ENV XMX $XMX
