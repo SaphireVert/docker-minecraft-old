@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e -x
-echo "Hello from spigot.sh"
+# echo "Hello from spigot.sh"
 
 if [ -e $EULA ]; then
   echo "Please accept the EULA"
@@ -21,17 +21,31 @@ if [ -e $XMX ]; then
   XMX=1G
 fi
 
+# Ensure that final direcories exist
+# [ -d $SPIGOTDIR/worlds ] || mkdir $SPIGOTDIR/worlds
+
+
+
+# Manage the Multiverse plugin
+echo "Force download is set to: $FORCE_DOWNLOAD"
+if [[ ! -f $SPIGOTDIR/plugins/Multiverse-Core-4.1.1-SNAPSHOT.jar || "$FORCE_DOWNLOAD" == "true" ]]; then
+  echo "Downloading Multiverse..."
+  [ -d $SPIGOTDIR/plugins ] || mkdir $SPIGOTDIR/plugins
+  wget http://ci.onarandombox.com/job/Multiverse-Core/lastBuild/artifact/target/Multiverse-Core-4.1.1-SNAPSHOT.jar -P $TEMPDIR/plugins/
+  # Install plugin multiverse
+  mv $TEMPDIR/plugins/* $SPIGOTDIR/plugins
+else
+  echo "Multiverse is already here"
+fi
+
+# Copy spigot
+cp /spigot/spigot.jar $SPIGOTDIR/spigot.jar
+
+#
+# Final step: launch the Spigot server
+#
+# Note: use `java -jar spigot.jar --help` for spigot options list
 cd $SPIGOTDIR
-ls -al
-pwd
-
-#Install plugin multiverse
-cp /install/Multiverse-Core-*-SNAPSHOT.jar $SPIGOTDIR/data/plugins
-
-echo "java -jar -Xms$XMS -Xmx$XMX spigot.jar -c $SPIGOTDIR/data/server.properties -P $SPIGOTDIR/data/plugins -W $SPIGOTDIR/data/worlds nogui"
-# java -jar -Xms$XMS -Xmx$XMX spigot.jar \
-#   -c $SPIGOTDIR/data/server.properties \
-#   -P $SPIGOTDIR/data/plugins \
-#   -W $SPIGOTDIR/data/worlds nogui
-java -jar -Xms256M -Xmx1G spigot.jar -c /minecraft/data/server.properties -P /minecraft/data/plugins -W /minecraft/data/worlds --nogui
-#--noconsole --nojline
+echo -e "Launching the command:\njava -jar -Xms$XMS -Xmx$XMX spigot.jar -W $SPIGOTDIR/data/worlds nogui"
+java -jar -Xms$XMS -Xmx$XMX spigot.jar \
+     -W $SPIGOTDIR/worlds nogui
