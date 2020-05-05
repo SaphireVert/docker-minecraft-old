@@ -1,6 +1,7 @@
 # Set the default REV value
-#ARG REV=latest
+ARG REV=latest
 # Set the default installation dir
+ARG TEMPDIR=/tmpmineserv
 ARG SPIGOTDIR=/minecraft
 
 # First stage
@@ -31,10 +32,12 @@ RUN java -jar BuildTools.jar --rev $REV
 # Second stage
 FROM ubuntu:20.04
 ARG REV
+ARG TEMPDIR
 ARG SPIGOTDIR
 ARG XMS
 ARG XMX
 ENV REV $REV
+ENV TEMPDIR $TEMPDIR
 ENV SPIGOTDIR $SPIGOTDIR
 ENV XMS $XMS
 ENV XMX $XMX
@@ -49,12 +52,12 @@ RUN apt install -y \
     wget
 RUN apt clean && apt autoremove
 
-WORKDIR $SPIGOTDIR
-COPY --from=spigotbuild $SPIGOTDIR/spigot-*.jar .
-RUN ln -s spigot-$REV.jar spigot.jar
+WORKDIR $TEMPDIR
+COPY --from=spigotbuild $SPIGOTDIR/spigot-$REV.jar /spigot/spigot.jar
+# RUN ln -s /spigot/spigot-$REV.jar $SPIGOTDIR/spigot.jar
 ADD ./spigot.sh /spigot.sh
 RUN chmod +x /spigot.sh
-RUN wget http://ci.onarandombox.com/job/Multiverse-Core/lastBuild/artifact/target/Multiverse-Core-4.1.1-SNAPSHOT.jar -P /install/
+#RUN wget http://ci.onarandombox.com/job/Multiverse-Core/lastBuild/artifact/target/Multiverse-Core-4.1.1-SNAPSHOT.jar -P $TEMPDIR/plugins/
 
 EXPOSE 25565
 EXPOSE 8123
