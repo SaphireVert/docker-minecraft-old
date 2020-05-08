@@ -21,11 +21,34 @@ if [ -e $XMX ]; then
   XMX=1G
 fi
 
+
+cd $SPIGOTDIR
+function setServerProp {
+  if [[ ! -f "$SPIGOTDIR/server.properties" ]]; then
+    echo "Server.properties doesn't exists"
+    echo "Creating server.properties file..."
+    touch server.properties
+  fi
+  local prop=$1
+  local var=$2
+  if [ -n "$var" ]; then
+    echo "Setting $prop to $var"
+    sed -i "/$prop\s*=/ c $prop=$var" $SPIGOTDIR/server.properties
+  fi
+}
+
+ls -al $SPIGOTDIR
+setServerProp "motd" "$MOTD"
+
+
+
+
+
+
+
+
 # Ensure that final direcories exist
 # [ -d $SPIGOTDIR/worlds ] || mkdir $SPIGOTDIR/worlds
-
-
-
 # Manage the Multiverse plugin
 echo "Force download is set to: $FORCE_DOWNLOAD"
 if [[ ! -f $SPIGOTDIR/plugins/Multiverse-Core-4.1.1-SNAPSHOT.jar || "$FORCE_DOWNLOAD" == "true" ]]; then
@@ -40,7 +63,6 @@ fi
 
 # Copy spigot
 cp /spigot/spigot.jar $SPIGOTDIR/spigot.jar
-
 #
 # Final step: launch the Spigot server
 #

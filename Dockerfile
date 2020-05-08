@@ -55,9 +55,9 @@ RUN apt clean && apt autoremove
 WORKDIR $TEMPDIR
 COPY --from=spigotbuild $SPIGOTDIR/spigot-$REV.jar /spigot/spigot.jar
 # RUN ln -s /spigot/spigot-$REV.jar $SPIGOTDIR/spigot.jar
+RUN echo "spigot 2020-05-12_11-32-11"
 ADD ./spigot.sh /spigot.sh
 RUN chmod +x /spigot.sh
-#RUN wget http://ci.onarandombox.com/job/Multiverse-Core/lastBuild/artifact/target/Multiverse-Core-4.1.1-SNAPSHOT.jar -P $TEMPDIR/plugins/
 
 EXPOSE 25565
 EXPOSE 8123
