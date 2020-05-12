@@ -24,8 +24,7 @@ up-d:
 	docker-compose up -d
 
 build: check-env
-	TIMESTAMP=$(shell date +%Y-%m-%d_%H-%M-%S) && \
-	echo $$TIMESTAMP && \
+	TIMESTAMP=$(shell date +"%Y-%m-%d_%H:%M:%S") && \
 	sed -i "/RUN echo \"spigot/ c RUN echo \"spigot $$TIMESTAMP\"" Dockerfile
 	docker build --build-arg REV=${REV} -t ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot .
 	docker tag ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:latest ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:${REV}
