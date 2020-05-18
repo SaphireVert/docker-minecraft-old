@@ -3,3 +3,4 @@ spigot-*.jar
 data/*
 test.sh
 test
+sandbox*
