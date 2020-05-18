@@ -7,24 +7,25 @@
 # scalewayMinecraftServ
 Héberger des serveurs Minecraft chez un prestataire spécialisé c'est bien, le faire from scratch, c'est mieux !
 
-# Installation
-## Pré requis :
+# Setup
+## For NUBS :
+Open a terminal and type :
+<!-- curl -s -L https://raw.githubusercontent.com/epfl-dojo/dojo-like-script/master/run.sh | bash -s -- -o=epfl-si -->
+
+
+
+For the confirmed users :
+
+## Required :
 - Linux
-- Docker, docker-compose
+- Docker, docker-compose, make, tmux
 
-## Téléchargement
-- Cloner le repos github
+## Install server
+- git clone
+- cd scalewayMinecraftServ
+- cp .env_sample .env
+- ```make build up``` and enjoy !
 
 
-
-
-
-# TODO
-- [x] Makefile: push image
-- [x] Finish docker-compose file,
-- [x] Add env variable in docker-compose file for /spigot.sh
-- [x] Ne pas redownloader plugin si déjà downloadé
-- [x] Option pour force download
-- [x] Trouver qui a la priorité pour les variables d'environnement entre .env, docker-compose up et le makefile (avec motd par exemple)
-- [ ] Pouvoir set les propriétés de server.properties dans .env
-- [ ] Pouvoir taper commandes dans la console du serveur
+## BungeeCord :
+Install
