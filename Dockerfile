@@ -15,12 +15,11 @@ RUN echo "Building spigot for rev=$REV"
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Europe/Zurich
 
-RUN apt update -y && \
-    apt upgrade -y
-RUN apt install -y \
-      git \
-      openjdk-11-jdk \
-      wget
+RUN apt-get update -y
+RUN apt-get install -y \
+        git \
+        openjdk-11-jdk \
+        wget
 
 RUN mkdir -p $SPIGOTDIR
 WORKDIR $SPIGOTDIR
@@ -55,7 +54,7 @@ RUN apt clean && apt autoremove
 WORKDIR $TEMPDIR
 COPY --from=spigotbuild $SPIGOTDIR/spigot-$REV.jar /spigot/spigot.jar
 # RUN ln -s /spigot/spigot-$REV.jar $SPIGOTDIR/spigot.jar
-RUN echo "spigot 2020-05-12_11:35:03"
+RUN echo "spigot 2020-05-18_16:30:04"
 ADD ./spigot.sh /spigot.sh
 RUN chmod +x /spigot.sh
 
