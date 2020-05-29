@@ -1,3 +1,4 @@
+#Thanks to https://github.com/itzg/docker-bungeecord
 ip_forward: false
 forge_support: false
 network_compression_threshold: 256
@@ -16,7 +17,7 @@ groups:
   - admin
 servers:
   lobby:
-    address: mc:25565
+    address: spigotmc:25567
     restricted: false
     motd: '&1Just another BungeeCord - Forced Host'
 timeout: 30000
@@ -24,7 +25,7 @@ listeners:
 - motd: '&1Another Bungee server'
   priorities:
   - lobby
-  host: 0.0.0.0:25577
+  host: 0.0.0.0:25565
   max_players: 1
   force_default_server: false
   tab_size: 60

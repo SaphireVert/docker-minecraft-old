@@ -27,5 +27,11 @@ For the confirmed users :
 - ```make build up``` and enjoy !
 
 
-## BungeeCord :
-Install
+# BungeeCord :
+## On Spigot server files
+Download and launch BungeeCord :
+Set the online mode false in the serser.properties server's files
+Set the propertie bungeecord: true in the spigot.yml file
+
+## On BungeeCord config file :
+Set the lobby server address propertie with the spigot server address
