@@ -1,6 +1,8 @@
 .env
 spigot-*.jar
 data/*
+bungeecord/data/*
+spigot/data/*
 test.sh
 test
 sandbox*

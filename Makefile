@@ -23,11 +23,14 @@ up:
 up-d:
 	docker-compose up -d
 
-build: check-env
+build-sp: check-env
 	TIMESTAMP=$(shell date +"%Y-%m-%d_%H:%M:%S") && \
-	sed -i "/RUN echo \"spigot/ c RUN echo \"spigot $$TIMESTAMP\"" Dockerfile
-	docker build --build-arg REV=${REV} -t ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot .
+	sed -i "/RUN echo \"spigot/ c RUN echo \"spigot $$TIMESTAMP\"" ./spigot/Dockerfile
+	docker build --build-arg REV=${REV} -t ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot ./spigot
 	docker tag ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:latest ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:${REV}
+
+build-bc:
+	docker build -t ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}bungeecord ./bungeecord
 
 force-build: check-env
 	docker build --no-cache --build-arg REV=${REV} -t ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot .
