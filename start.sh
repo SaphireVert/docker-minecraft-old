@@ -16,7 +16,7 @@ if [ "echo $(grep "docker" /etc/group | grep ${USER})" = "" ]; then
   sudo usermod -aG docker ${USER}
 fi
 
-make build up
+make build-sp up
 
 
 echo fini
