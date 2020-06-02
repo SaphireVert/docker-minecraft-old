@@ -3,7 +3,7 @@
 # set -e -x
 set -x
 
-sudo apt-get update && apt upgrade
+sudo apt-get update -y && apt upgrade -y
 sudo apt-get install docker docker-compose make
 cp .env_sample .env
 
