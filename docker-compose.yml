@@ -59,12 +59,11 @@ services:
       - ALLOW_FLIGHT=${ALLOW_FLIGHT}
       - MAX_WORLD_SIZE=${MAX_WORLD_SIZE}
 
-  # bungeecord:
-  #   image: "${DOCKER_HUB_USERNAME}/${IMG_PREFIX}bungeecord:latest"
-  #   environment:
-  #     BUNGEE_JAR_REVISION: "1"
-  #   ports:
-  #     - 25565:25577
-  #   volumes:
-  #     - ./bungeecord/config.yml:/bungeecord/server/config.yml
-  #     - ${PWD}/bungeecord/data:/bungeecord/server
+  bungeecord:
+    image: itzg/bungeecord
+    environment:
+      BUNGEE_JAR_REVISION: "1"
+    ports:
+      - 25565:25577
+    volumes:
+      - ./bungeecord/config.yml:/server/config.yml
