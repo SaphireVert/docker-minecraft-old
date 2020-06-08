@@ -35,3 +35,5 @@ Set the propertie bungeecord: true in the spigot.yml file
 
 ## On BungeeCord config file :
 Set the lobby server address propertie with the spigot server address
+ip-forward = true
+ENABLE_COMMAND_BLOCK=true
