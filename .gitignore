@@ -1,6 +1,7 @@
 .env
 spigot-*.jar
 data/*
+data*
 bungeecord/data/*
 spigot/data/*
 test.sh

@@ -63,6 +63,9 @@ else
   echo "Multiverse is already here"
 fi
 
+# Copy spigot
+cp /spigot/spigot.jar $SPIGOTDIR/spigot.jar
+
 #
 # Final step: launch the Spigot server
 #
