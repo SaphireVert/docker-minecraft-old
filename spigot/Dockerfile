@@ -54,8 +54,10 @@ RUN apt clean && apt autoremove
 WORKDIR $TEMPDIR
 COPY --from=spigotbuild $SPIGOTDIR/spigot-$REV.jar /spigot/spigot.jar
 # RUN ln -s /spigot/spigot-$REV.jar $SPIGOTDIR/spigot.jar
-RUN echo "spigot 2020-06-18_12:31:27"
+RUN echo "spigot 2020-06-18_16:01:22"
 ADD ./spigot.sh /spigot.sh
+ADD ./server.properties /tmpmineserv/server.properties
+ADD ./spigot.yml /tmpmineserv/spigot.yml
 RUN chmod +x /spigot.sh
 
 EXPOSE 25565
