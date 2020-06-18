@@ -15,7 +15,7 @@ clean:
 	sudo rm -rf data/*
 
 inside-sp:
-	docker-compose run spigot /bin/bash
+	docker-compose run spigotmc /bin/bash
 
 inside-bc:
 	docker-compose run bungeecord /bin/bash
