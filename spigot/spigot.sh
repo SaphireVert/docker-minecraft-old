@@ -21,6 +21,8 @@ if [ -e $XMX ]; then
   XMX=1G
 fi
 
+# Copy spigot files
+cp /tmpmineserv/* $SPIGOTDIR
 
 cd $SPIGOTDIR
 function setServerProp {
@@ -61,8 +63,6 @@ else
   echo "Multiverse is already here"
 fi
 
-# Copy spigot
-cp /spigot/spigot.jar $SPIGOTDIR/spigot.jar
 #
 # Final step: launch the Spigot server
 #
