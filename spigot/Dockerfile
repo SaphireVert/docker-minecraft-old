@@ -54,7 +54,7 @@ RUN apt clean && apt autoremove
 WORKDIR $TEMPDIR
 COPY --from=spigotbuild $SPIGOTDIR/spigot-$REV.jar /spigot/spigot.jar
 # RUN ln -s /spigot/spigot-$REV.jar $SPIGOTDIR/spigot.jar
-RUN echo "spigot 2020-05-26_18:02:34"
+RUN echo "spigot 2020-06-18_12:31:27"
 ADD ./spigot.sh /spigot.sh
 RUN chmod +x /spigot.sh
 
