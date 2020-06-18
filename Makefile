@@ -14,8 +14,11 @@ reset: check-env
 clean:
 	sudo rm -rf data/*
 
-inside:
+inside-sp:
 	docker-compose run spigot /bin/bash
+
+inside-bc:
+	docker-compose run bungeecord /bin/bash
 
 up:
 	docker-compose up
