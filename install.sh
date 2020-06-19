@@ -7,6 +7,7 @@
 # [x] Clone this repo and cd into dir (see https://unix.stackexchange.com/a/97922)
 # [x] cp .env_sample to .env
 # [~] ask question to change the .env file (wizard)
+# [x] launch the server
 # [ ] finally, launch the server in a tmux process (see https://unix.stackexchange.com/questions/22682/how-to-launch-a-set-of-program-inside-tmux-or-gnome-terminal-within-a-script etc.)
 #
 
@@ -65,3 +66,15 @@ function set_the_motd {
 }
 
 set_the_motd
+
+function build_docker_image {
+  make build-sp
+}
+
+build_docker_image
+
+function run_server {
+  make up
+}
+
+run_server
