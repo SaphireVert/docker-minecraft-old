@@ -16,8 +16,15 @@ if [ "echo $(grep "docker" /etc/group | grep ${USER})" = "" ]; then
   sudo usermod -aG docker ${USER}
 fi
 
-make build-sp up
 
+
+make build-sp build-bc up
+
+echo $PWD
+
+touch /etc/rc0.d/mineinstall
+# Thanks to https://stackoverflow.com/a/4774063/13715020
+echo >> /etc/rc0.d/mineinstall $( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 
 echo fini
 
