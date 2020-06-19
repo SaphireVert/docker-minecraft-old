@@ -3,10 +3,10 @@
 # See https://github.com/SaphireVert/scalewayMinecraftServ/issues/10
 # TODO:
 # [ ] Add a welcome header
-# [ ] Clone this repo and cd into dir (see https://unix.stackexchange.com/a/97922)
 # [ ] cp .env_sample to .env
 # [ ] ask question to change the .env file (wizard)
 # [x] Check that all dependencies are installed, e.g. tmux, git, etc...
+# [x] Clone this repo and cd into dir (see https://unix.stackexchange.com/a/97922)
 # [ ] finally, launch the server in a tmux process (see https://unix.stackexchange.com/questions/22682/how-to-launch-a-set-of-program-inside-tmux-or-gnome-terminal-within-a-script etc.)
 #
 
@@ -35,3 +35,14 @@ function check_requirements {
 }
 
 check_requirements git tmux docker docker-compose
+
+function clone_repos {
+  # TODO: confirm current path to clone repo
+  if ! [[ -d "scalewayMinecraftServ" ]]; then
+    git clone "$1" && cd "$(basename "$1" .git)"
+    pwd
+  else
+    cd scalewayMinecraftServ && git pull --rebase
+  fi
+}
+clone_repos https://github.com/saphirevert/scalewayMinecraftServ
