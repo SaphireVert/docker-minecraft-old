@@ -21,8 +21,6 @@ function header {
   echo -e "\e[32mHello from scalewayMinecraftServ"
 }
 
-header
-
 function check_requirements {
   for app in "$@"
   do
@@ -34,7 +32,6 @@ function check_requirements {
   done
 }
 
-check_requirements git tmux docker docker-compose
 
 function clone_repos {
   # TODO: confirm current path to clone repo
@@ -42,10 +39,10 @@ function clone_repos {
     git clone "$1" && cd "$(basename "$1" .git)"
     pwd
   else
-    cd scalewayMinecraftServ && git pull --rebase
+    cd scalewayMinecraftServ
+    # TODO: it would be nice to `git pull`
   fi
 }
-clone_repos https://github.com/saphirevert/scalewayMinecraftServ
 
 function ensure_dotenv_present {
   if ! [[ -f ".env" ]]; then
@@ -55,7 +52,6 @@ function ensure_dotenv_present {
     echo "The file '.env' is already present"
   fi
 }
-ensure_dotenv_present
 
 function set_the_motd {
   read -p "Please enter the MOTD of the server [Default: A minecraft server]:" motd
@@ -64,17 +60,22 @@ function set_the_motd {
   sed -i "/MOTD=/ c MOTD=$motd" .env
 }
 
-set_the_motd
-
 function build_docker_image {
   make build-sp
 }
 
-build_docker_image
-
 function run_server {
   tmux new-session "make up; read"\; split-window "htop"\; select-layout even-horizontal;
-  # make up
 }
 
-run_server
+function run {
+  header
+  check_requirements git tmux docker docker-compose
+  clone_repos https://github.com/saphirevert/scalewayMinecraftServ
+  ensure_dotenv_present
+  set_the_motd
+  build_docker_image
+  run_server
+}
+
+run
