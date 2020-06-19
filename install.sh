@@ -1,43 +1,24 @@
 #!/usr/bin/env bash
 
-# set -e -x
-set -x
+# See https://github.com/SaphireVert/scalewayMinecraftServ/issues/10
+# TODO:
+# [ ] Add a welcome header
+# [ ] Check that all dependencies are installed, e.g. tmux, git, etc...
+# [ ] Clone this repo and cd into dir (see https://unix.stackexchange.com/a/97922)
+# [ ] cp .env_sample to .env
+# [ ] ask question to change the .env file (wizard)
+# [ ] finally, launch the server in a tmux process (see https://unix.stackexchange.com/questions/22682/how-to-launch-a-set-of-program-inside-tmux-or-gnome-terminal-within-a-script etc.)
+#
 
-sudo apt-get update -y && apt upgrade -y
-sudo apt-get install docker docker-compose make
-cp .env_sample .env
+# The aim of this script is to be ran with the command
+# curl -s -L https://raw.githubusercontent.com/saphirevert/scalewayMinecraftServ/install.sh | bash -s
+# directly on the server on which one want to deploy a Minecraft server.
+#
 
+set -e -x
 
-echo hey
-if [ "echo $(grep "docker" /etc/group | grep ${USER})" = "" ]; then
-  echo "Pas de groupe docker ou bien vous n'êtes pas dedans"
-  echo "Ajout de vous dans le groupe docker en cours"
-  sudo groupadd docker
-  sudo usermod -aG docker ${USER}
-fi
+function header {
+  echo -e "\e[32mHello from scalewayMinecraftServ"
+}
 
-
-
-make build-sp build-bc up
-
-echo $PWD
-
-touch /etc/rc0.d/mineinstall
-# Thanks to https://stackoverflow.com/a/4774063/13715020
-echo >> /etc/rc0.d/mineinstall $( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
-
-echo fini
-
-# sudo reboot
-
-# ajouter .env en copiant .env_sample
-# installer make docker docker-compose
-# docker socket
-#recommander utilisation tmux
-
-
-
-
-
-
-# grep -oP "(\?|&)${USER}=\K([0-9]+)" /etc/group
+header
