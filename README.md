@@ -1,39 +1,51 @@
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-- [scalewayMinecraftServ](#scalewayminecraftserv)
-- [TODO](#todo)
-
-<!-- /TOC -->
 # scalewayMinecraftServ
-Héberger des serveurs Minecraft chez un prestataire spécialisé c'est bien, le faire from scratch, c'est mieux !
+
+Héberger des serveurs Minecraft chez un prestataire spécialisé c'est bien, le
+faire from scratch, c'est mieux !
+
+<!-- TOC titleSize:2 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+## Table of Contents
+* [scalewayMinecraftServ](#scalewayminecraftserv)
+* [Setup](#setup)
+  * [Quick setup (good for n00bs)](#quick-setup-good-for-n00bs)
+* [For confirmed users](#for-confirmed-users)
+  * [Requirements](#requirements)
+  * [Install server](#install-server)
+* [Development](#development)
+* [Understand](#understand)
+<!-- /TOC -->
 
 # Setup
-## For NUBS :
-Open a terminal and type :
-<!-- curl -s -L https://raw.githubusercontent.com/epfl-dojo/dojo-like-script/master/run.sh | bash -s -- -o=epfl-si -->
 
+## Quick setup (good for n00bs)
 
+Open a terminal and type:
+```
+curl -s -L https://raw.githubusercontent.com/saphirevert/scalewayMinecraftServ/install.sh | bash -s
+```
 
-For the confirmed users :
+Note: this assumes that your are on a [Debian
+like](https://www.debian.org/derivatives/) operating system that uses `apt`.
 
-## Required :
-- Linux
+# For confirmed users
+
+## Requirements
+- Linux (debian like distros, needs apt)
 - Docker, docker-compose, make, tmux
 
 ## Install server
-- git clone
-- cd scalewayMinecraftServ
-- cp .env_sample .env
-- ```make build up``` and enjoy !
+  1. Get the code: `git clone https://github.com/saphirevert/scalewayMinecraftServ`;
+  1. Enter the directory: `cd scalewayMinecraftServ`;
+  1. Duplicate the sample environment: `cp .env_sample .env`;
+  1. Edit the `.env` file and set your own values;
+  1. Build the docker containers: `make build`;
+  1. Launch the server with `make up` and enjoy!
+
+# Development
+
+// TODO
 
 
-# BungeeCord :
-## On Spigot server files
-Download and launch BungeeCord :
-Set the online mode false in the serser.properties server's files
-Set the propertie bungeecord: true in the spigot.yml file
+# Understand
 
-## On BungeeCord config file :
-Set the lobby server address propertie with the spigot server address
-ip-forward = true
-ENABLE_COMMAND_BLOCK=true
+// TODO
