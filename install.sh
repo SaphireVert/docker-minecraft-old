@@ -3,10 +3,10 @@
 # See https://github.com/SaphireVert/scalewayMinecraftServ/issues/10
 # TODO:
 # [ ] Add a welcome header
-# [ ] ask question to change the .env file (wizard)
 # [x] Check that all dependencies are installed, e.g. tmux, git, etc...
 # [x] Clone this repo and cd into dir (see https://unix.stackexchange.com/a/97922)
 # [x] cp .env_sample to .env
+# [~] ask question to change the .env file (wizard)
 # [ ] finally, launch the server in a tmux process (see https://unix.stackexchange.com/questions/22682/how-to-launch-a-set-of-program-inside-tmux-or-gnome-terminal-within-a-script etc.)
 #
 
@@ -56,3 +56,12 @@ function ensure_dotenv_present {
   fi
 }
 ensure_dotenv_present
+
+function set_the_motd {
+  read -p "Please enter the MOTD of the server [Default: A minecraft server]:" motd
+  motd=${motd:-'A minecraft server'}
+  echo $motd
+  sed -i "/MOTD=/ c MOTD=$motd" .env
+}
+
+set_the_motd
