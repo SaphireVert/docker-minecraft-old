@@ -2,14 +2,13 @@
 
 # See https://github.com/SaphireVert/scalewayMinecraftServ/issues/10
 # TODO:
-# [ ] Add a welcome header
+# [x] Add a welcome header
 # [x] Check that all dependencies are installed, e.g. tmux, git, etc...
 # [x] Clone this repo and cd into dir (see https://unix.stackexchange.com/a/97922)
 # [x] cp .env_sample to .env
 # [~] ask question to change the .env file (wizard)
 # [x] launch the server
-# [ ] finally, launch the server in a tmux process (see https://unix.stackexchange.com/questions/22682/how-to-launch-a-set-of-program-inside-tmux-or-gnome-terminal-within-a-script etc.)
-#
+# [x] finally, launch the server in a tmux process (see https://unix.stackexchange.com/questions/22682/how-to-launch-a-set-of-program-inside-tmux-or-gnome-terminal-within-a-script etc.)
 
 # The aim of this script is to be ran with the command
 # curl -s -L https://raw.githubusercontent.com/saphirevert/scalewayMinecraftServ/install.sh | bash -s
@@ -74,7 +73,8 @@ function build_docker_image {
 build_docker_image
 
 function run_server {
-  make up
+  tmux new-session "make up; read"\; split-window "htop"\; select-layout even-horizontal;
+  # make up
 }
 
 run_server
