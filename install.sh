@@ -32,6 +32,14 @@ function check_requirements {
   done
 }
 
+function check_group_docker {
+  if [ "echo $(grep "docker" /etc/group | grep ${USER})" = "" ]; then
+   echo "Docker group dosesn't exist or you're not in it."
+   echo "You might try the following commands:"
+   echo "sudo groupadd docker"
+   echo "sudo usermod -aG docker ${USER}"
+  fi
+}
 
 function clone_repos {
   # TODO: confirm current path to clone repo
@@ -71,6 +79,7 @@ function run_server {
 function run {
   header
   check_requirements git tmux docker docker-compose
+  check_group_docker
   clone_repos https://github.com/saphirevert/scalewayMinecraftServ
   ensure_dotenv_present
   set_the_motd
