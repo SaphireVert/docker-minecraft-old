@@ -1,7 +1,7 @@
 # Set the default REV value
 ARG REV=latest
 # Set the default installation dir
-ARG TEMPDIR=/tmpmineserv
+ARG TMPDIR=/tmpmineserv
 ARG SPIGOTDIR=/minecraft
 
 # First stage
@@ -31,12 +31,12 @@ RUN java -jar BuildTools.jar --rev $REV
 # Second stage
 FROM ubuntu:20.04
 ARG REV
-ARG TEMPDIR
+ARG TMPDIR
 ARG SPIGOTDIR
 ARG XMS
 ARG XMX
 ENV REV $REV
-ENV TEMPDIR $TEMPDIR
+ENV TMPDIR $TMPDIR
 ENV SPIGOTDIR $SPIGOTDIR
 ENV XMS $XMS
 ENV XMX $XMX
@@ -51,13 +51,13 @@ RUN apt install -y \
     wget
 RUN apt clean && apt autoremove
 
-WORKDIR $TEMPDIR
+WORKDIR $TMPDIR
 COPY --from=spigotbuild $SPIGOTDIR/spigot-$REV.jar /spigot/spigot.jar
-# RUN ln -s /spigot/spigot-$REV.jar $SPIGOTDIR/spigot.jar
-RUN echo "spigot 2020-06-18_16:17:34"
+# RUN ln -s /spigot/spigot-$REV.jar $TMPDIR/spigot.jar
+RUN echo "spigot 2020-06-19_15:19:43"
 ADD ./spigot.sh /spigot.sh
-ADD ./server.properties /tmpmineserv/server.properties
-ADD ./spigot.yml /tmpmineserv/spigot.yml
+ADD ./server.properties $TMPDIR/server.properties
+ADD ./spigot.yml $TMPDIR/spigot.yml
 RUN chmod +x /spigot.sh
 
 EXPOSE 25565
