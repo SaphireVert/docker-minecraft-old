@@ -9,7 +9,8 @@ services:
       - ${PWD}/data/spigot/server:${SPIGOTDIR}
 
     environment:
-      - EULA=true
+      - OPS=${OPS}
+      - EULA=${EULA}
       - XMS=${XMS}
       - XMX=${XMX}
       - FORCE_DOWNLOAD=false
