@@ -9,19 +9,12 @@ endif
 reset: check-env
 	# TODO: add a warning, because it clear the data directory !
 
-	./library.sh yesNoReset "Are you sure you want to delete world and all data from this server ? y/N"
+	./library.sh yesNoReset "Are you sure you want to reset all server ? All data will be lost, continue ? [y/N]"
 
 
-clean:
-	# echo $(filter-out $@,$(MAKECMDGOALS))
-	echo $(MAKECMDGOALS)
-	echo $(filter-out $@,$(MAKECMDGOALS))
-	# ifeq()
-	#
-	# endif
+clear:
 	# TODO: add a warning, because it clear the data directory !
-	# ./library.sh yesNoClean "Are you sure you want to delete world and all data from this server ? y/N"
-	# sudo rm -rf data/*
+	./library.sh yesNoClear "All your server data will be lost! Continue ? [y/N]"
 
 inside-sp:
 	docker-compose run spigotmc /bin/bash
