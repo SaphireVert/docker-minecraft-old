@@ -44,10 +44,3 @@ then
   echo "$2"
   yesNoReset
 fi
-
-
-
-  # echo "Sure ?"
-  # read -p "Are you sure you want to delete world and all data from this server ? y / N" response
-  # response=${response:-'n'}
-  # echo $response
