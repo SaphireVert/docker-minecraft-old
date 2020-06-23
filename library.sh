@@ -10,51 +10,47 @@ function yesNoPrompt {
   then
     # Yes
     echo "Yes"
+    tmpVar="Yes"
   else
     # No
     echo "No"
+    tmpVar="No"
   fi
 }
 
 function yesNoReset {
-  read -p "$2" -n 1 -r
-  if [[ $REPLY =~ ^[Yy]$ ]]
-  then
-    # Yes
-    echo "Yes"
-    sudo rm -rf data/* # make clean
-    make build
-    make up
-  else
-    # No
-    echo "No"
+  yesNoPrompt $1 "$2"
+  echo $tmpVar
+  if [[ "$tmpVar" == "Yes" ]]
+    then
+      echo "Reseting servers..."
+      sudo rm -rf data/*
+      make build
+      make up
+    else
+      echo "Aborted"
   fi
 }
 
 function yesNoClear {
-  read -p "$2" -n 1 -r
-  if [[ $REPLY =~ ^[Yy]$ ]]
-  then
-    # Yes
-    echo "Yes"
-    sudo rm -rf data/* # make clean
-  else
-    # No
-    echo "No"
+  yesNoPrompt $1 "$2"
+  if [[ "$tmpVar" == "Yes" ]]
+    then
+      echo "Clearing data..."
+      sudo rm -rf data/*
+    else
+      echo "Aborted"
   fi
 }
 
-if [[ "$1" == "script" ]]
-then
-  echo "Perfect !"
-fi
+
 
 if [[ "$1" == "yesNoReset" ]]
-then
-  yesNoReset $1 "$2"
+  then
+    yesNoReset
 fi
 
 if [[ "$1" == "yesNoClear" ]]
-then
-  yesNoClear $1 "$2"
+  then
+    yesNoClear
 fi
