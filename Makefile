@@ -6,25 +6,30 @@ else
 include .env
 endif
 
+# Clear server data and rebuild the server
 reset: check-env
 	# TODO: add a warning, because it clear the data directory !
 
 	./library.sh yesNoReset "Are you sure you want to reset all server ? All data will be lost, continue ? [y/N]"
 
-
+# Clear all server data
 clear:
 	# TODO: add a warning, because it clear the data directory !
 	./library.sh yesNoClear "All your server data will be lost! Continue ? [y/N]"
 
+# Go in the spigot docker container
 inside-sp:
 	docker-compose run spigotmc /bin/bash
 
+# Go in the bungeecord docker container
 inside-bc:
 	docker-compose run bungeecord /bin/bash
 
+# Start the server
 up:
 	docker-compose up
 
+# Start the server (detached)
 up-d:
 	docker-compose up -d
 
@@ -60,11 +65,14 @@ cp-spigot: check-env build
 	docker cp tmpcntr:${$SPIGOTDIR}/spigot-${REV}.jar .
 	docker rm -f tmpcntr
 
+# Run spigot server only
 run: check-env
 	docker run -e EULA=true -it ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot
 
+# Enter in running spigo container
 exec: check-env
 	docker exec -it ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot /bin/bash
 
+# Docker push
 push: check-env
 	docker push ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:latest
