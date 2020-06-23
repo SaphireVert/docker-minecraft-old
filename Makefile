@@ -8,9 +8,8 @@ endif
 
 reset: check-env
 	# TODO: add a warning, because it clear the data directory !
-	$(MAKE) clean
-	$(MAKE) build
-	$(MAKE) up
+
+	./library.sh yesNoReset "Are you sure you want to delete world and all data from this server ? y/N"
 
 clean:
 	# TODO: add a warning, because it clear the data directory !
