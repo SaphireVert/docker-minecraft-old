@@ -11,9 +11,17 @@ reset: check-env
 
 	./library.sh yesNoReset "Are you sure you want to delete world and all data from this server ? y/N"
 
+
 clean:
+	# echo $(filter-out $@,$(MAKECMDGOALS))
+	echo $(MAKECMDGOALS)
+	echo $(filter-out $@,$(MAKECMDGOALS))
+	# ifeq()
+	#
+	# endif
 	# TODO: add a warning, because it clear the data directory !
-	sudo rm -rf data/*
+	# ./library.sh yesNoClean "Are you sure you want to delete world and all data from this server ? y/N"
+	# sudo rm -rf data/*
 
 inside-sp:
 	docker-compose run spigotmc /bin/bash
