@@ -22,7 +22,7 @@ if [ -e $XMX ]; then
 fi
 
 # Copy spigot files
-cp /tmpmineserv/* $SPIGOTDIR
+cp -r /tmpmineserv/* $SPIGOTDIR
 
 cd $SPIGOTDIR
 function setFileProp {
