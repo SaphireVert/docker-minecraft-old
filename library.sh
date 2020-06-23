@@ -9,11 +9,9 @@ function yesNoPrompt {
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
     # Yes
-    echo "Yes"
     tmpVar="Yes"
   else
     # No
-    echo "No"
     tmpVar="No"
   fi
 }
@@ -47,10 +45,10 @@ function yesNoClear {
 
 if [[ "$1" == "yesNoReset" ]]
   then
-    yesNoReset
+    yesNoReset $1 "$2"
 fi
 
 if [[ "$1" == "yesNoClear" ]]
   then
-    yesNoClear
+    yesNoClear $1 "$2"
 fi
