@@ -43,12 +43,18 @@ up:
 up-d:
 	docker-compose up -d
 
+up-slave:
+	docker-compose -f docker-compose-slave.yml up
+
+up-slave-d:
+	docker-compose -df docker-compose-slave.yml up
+
 # Build both Spigot and BungeeCord
 build: check-env
 	@echo "\n  :: Build Spigot container ::\n"
-	$(MAKE) build-sp
-	#echo "Build Bungeecord container"
-	#$(MAKE) build-bc
+	$(MAKE) rebuild-sp
+	# echo "Build Bungeecord container"
+	# $(MAKE) build-bc
 
 # Build Spigot but ensure a change in ./spigot/Dockerfile in order to reload
 # spigot.sh in the image — for development purpose.
