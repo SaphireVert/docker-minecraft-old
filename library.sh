@@ -23,7 +23,7 @@ function yesNoReset {
     then
       echo "Reseting servers..."
       sudo rm -rf data/*
-      make build
+      make rebuild-sp
       make up
     else
       echo "Aborted"
