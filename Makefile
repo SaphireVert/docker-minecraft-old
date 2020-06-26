@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 check-env:
 ifeq ($(wildcard .env),)
 	@echo "Please create your .env file first, from .env_sample"
@@ -5,6 +6,15 @@ ifeq ($(wildcard .env),)
 else
 include .env
 endif
+
+test:
+	read -p "Did you forget to modify the CHANGELOG? Want to abort? [Yy]: " -n 1 -r; \
+	if [[ ! $$REPLY =~ ^[Yy]$$ ]]; then \
+		echo -e "\nAborting....\n"; \
+		exit 1; \
+	else \
+		echo -e "\nContinuing....\n"; \
+	fi
 
 # Clear server data and rebuild the server
 reset: check-env
