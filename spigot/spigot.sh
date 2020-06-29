@@ -92,17 +92,9 @@ setFileProp "max-world-size" "$MAX_WORLD_SIZE" "$SPIGOTDIR/server.properties" "=
 setFileProp "bungeecord" "$ENABLE_BUNGEECORD" "$SPIGOTDIR/spigot.yml" ": " "  "
 
 
-
-
-
-function writeFile {
-  local text=$1
-  local filePath=$2
-  echo $text > $filePath
-}
-
-writeFile "$OPS" "$SPIGOTDIR/ops.txt"
-
+# Write potential OPS in ops.txt, which will be converted to ops.json when the
+# server starts
+echo "$(echo $OPS | tr "," "\n")" > "$SPIGOTDIR/ops.txt"
 
 
 # Ensure that final direcories exist
