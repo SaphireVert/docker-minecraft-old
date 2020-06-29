@@ -13,7 +13,7 @@ services:
       - EULA=${EULA}
       - XMS=${XMS}
       - XMX=${XMX}
-      - FORCE_DOWNLOAD=false
+      - FORCE_DOWNLOAD=${FORCE_DOWNLOAD}
       - ENABLE_BUNGEECORD=true
       - BROADCAST_RCON_TO_OPS=${BROADCAST_RCON_TO_OPS}
       - VIEW_DISTANCE=${VIEW_DISTANCE}
