@@ -3,7 +3,7 @@ services:
   spigotmc:
     image: "${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:${REV}"
     ports:
-      - "25567:25565"
+      - "${SERVER_PORT}:25565"
       # This has to be smarter, e.g. mount each file and sub_directories
     volumes:
       - ${PWD}/data/spigot/server:${SPIGOTDIR}
@@ -14,7 +14,7 @@ services:
       - XMS=${XMS}
       - XMX=${XMX}
       - FORCE_DOWNLOAD=false
-      - ENABLE_BUNGEECORD=true
+      - ENABLE_BUNGEECORD=false
       - BROADCAST_RCON_TO_OPS=${BROADCAST_RCON_TO_OPS}
       - VIEW_DISTANCE=${VIEW_DISTANCE}
       - MAX_BUILD_HEIGHT=${MAX_BUILD_HEIGHT}
@@ -22,7 +22,7 @@ services:
       - LEVEL_SEED=${LEVEL_SEED}
       - RCON_PORT=${RCON_PORT}
       - GAMEMODE=${GAMEMODE}
-      - SERVER_PORT=25565
+      - SERVER_PORT=${SERVER_PORT}
       - ALLOW_NETHER=${ALLOW_NETHER}
       - ENABLE_COMMAND_BLOCK=${ENABLE_COMMAND_BLOCK}
       - ENABLE_RCON=${ENABLE_RCON}
@@ -57,15 +57,6 @@ services:
       - MAX_PLAYERS=${MAX_PLAYERS}
       - RESOURCE_PACK_SHA1=${RESOURCE_PACK_SHA1}
       - SPAWN_PROTECTION=${SPAWN_PROTECTION}
-      - ONLINE_MODE=false
+      - ONLINE_MODE=${ONLINE_MODE}
       - ALLOW_FLIGHT=${ALLOW_FLIGHT}
       - MAX_WORLD_SIZE=${MAX_WORLD_SIZE}
-
-  bungeecord:
-    image: itzg/bungeecord
-    environment:
-      BUNGEE_JAR_REVISION: "1"
-    ports:
-      - 25565:25577
-    volumes:
-      - ./bungeecord/config.yml:/server/config.yml
