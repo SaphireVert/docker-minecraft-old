@@ -54,7 +54,7 @@ RUN apt clean && apt autoremove
 WORKDIR $TEMPDIR
 COPY --from=spigotbuild $SPIGOTDIR/spigot-$REV.jar /spigot/spigot.jar
 # RUN ln -s /spigot/spigot-$REV.jar $TEMPDIR/spigot.jar
-RUN echo "spigot 2020-06-19_15:19:43"
+RUN echo "spigot 2020-06-29_12:13:43"
 ADD ./spigot.sh /spigot.sh
 ADD ./server.properties $TEMPDIR/server.properties
 ADD ./spigot.yml $TEMPDIR/spigot.yml
