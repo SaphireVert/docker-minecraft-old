@@ -15,7 +15,7 @@ test:
 	else \
 		echo -e "\nContinuing....\n"; \
 	fi
-
+ 
 # Clear server data and rebuild the server
 reset: check-env
 	# TODO: add a warning, because it clear the data directory !
