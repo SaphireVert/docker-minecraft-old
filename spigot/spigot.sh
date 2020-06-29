@@ -22,74 +22,86 @@ if [ -e $XMX ]; then
 fi
 
 # Copy spigot files
-cp /tmpmineserv/* $SPIGOTDIR
+cp -r /tmpmineserv/* $SPIGOTDIR
 
 cd $SPIGOTDIR
-function setServerProp {
-  if [[ ! -f "$SPIGOTDIR/server.properties" ]]; then
-    echo "Server.properties doesn't exists"
-    echo "Creating server.properties file..."
-    touch server.properties
-  fi
+function setFileProp {
   local prop=$1
   local var=$2
+  local filePath=$3
+  local fileSign=$4
+  local spacesBefore=$5
+  if [[ ! -f "$filePath" ]]; then
+    echo "$filePath doesn't exist"
+    echo "Creating $filePath file..."
+    touch "$filePath"
+  fi
   if [ -n "$var" ]; then
     echo "Setting $prop to $var"
-    sed -i "/$prop\s*=/ c $prop=$var" $SPIGOTDIR/server.properties
+    sed -i "/$prop\s*$fileSign/c\\$spacesBefore$prop$fileSign$var" $filePath
   fi
 }
 
-
-
-
 ls -al $SPIGOTDIR
-setServerProp "broadcast-rcon-to-ops" "$BROADCAST_RCON_TO_OPS"
-setServerProp "view-distance" "$VIEW_DISTANCE"
-setServerProp "max-build-height" "$MAX_BUILD_HEIGHT"
-setServerProp "server-ip" "$SERVER_IP"
-setServerProp "level-seed" "$LEVEL_SEED"
-setServerProp "rcon.port" "$RCON_PORT"
-setServerProp "gamemode" "$GAMEMODE"
-setServerProp "server-port" "$SERVER_PORT"
-setServerProp "allow-nether" "$ALLOW_NETHER"
-setServerProp "enable-command-block" "$ENABLE_COMMAND_BLOCK"
-setServerProp "enable-rcon" "$ENABLE_RCON"
-setServerProp "enable-query" "$ENABLE_QUERY"
-setServerProp "op-permission-level" "$OP_PERMISSION_LEVEL"
-setServerProp "prevent-proxy-connections" "$PREVENT_PROXY_CONNECTIONS"
-setServerProp "generator-settings" "$GENERATOR_SETTINGS"
-setServerProp "resource-pack" "$RESOURCE_PACK"
-setServerProp "level-name" "$LEVEL_NAME"
-setServerProp "rcon.password" "$RCON_PASSWORD"
-setServerProp "player-idle-timeout" "$PLAYER_IDLE_TIMEOUT"
-setServerProp "motd" "$MOTD"
-setServerProp "query.port" "$QUERY_PORT"
-setServerProp "debug" "$DEBUG"
-setServerProp "force-gamemode" "$FORCE_GAMEMODE"
-setServerProp "hardcore" "$HARDCORE"
-setServerProp "white-list" "$WHITE_LIST"
-setServerProp "broadcast-console-to-ops" "$BROADCAST_CONSOLE_TO_OPS"
-setServerProp "pvp" "$PVP"
-setServerProp "spawn-npcs" "$SPAWN_NPCS"
-setServerProp "generate-structures" "$GENERATE_STRUCTURES"
-setServerProp "spawn-animals" "$SPAWN_ANIMALS"
-setServerProp "snooper-enabled" "$SNOOPER_ENABLED"
-setServerProp "difficulty" "$DIFFICULTY"
-setServerProp "function-permission-level" "$FUNCTION_PERMISSION_LEVEL"
-setServerProp "network-compression-threshold" "$NETWORK_COMPRESSION_THRESHOLD"
-setServerProp "level-type" "$LEVEL_TYPE"
-setServerProp "spawn-monsters" "$SPAWN_MONSTERS"
-setServerProp "max-tick-time" "$MAX_TICK_TIME"
-setServerProp "enforce-whitelist" "$ENFORCE_WHITELIST"
-setServerProp "use-native-transport" "$USE_NATIVE_TRANSPORT"
-setServerProp "max-players" "$MAX_PLAYERS"
-setServerProp "resource-pack-sha1" "$RESOURCE_PACK_SHA1"
-setServerProp "spawn-protection" "$SPAWN_PROTECTION"
-setServerProp "online-mode" "$ONLINE_MODE"
-setServerProp "allow-flight" "$ALLOW_FLIGHT"
-setServerProp "max-world-size" "$MAX_WORLD_SIZE"
+setFileProp "broadcast-rcon-to-ops" "$BROADCAST_RCON_TO_OPS" "$SPIGOTDIR/server.properties" "="
+setFileProp "view-distance" "$VIEW_DISTANCE" "$SPIGOTDIR/server.properties" "="
+setFileProp "max-build-height" "$MAX_BUILD_HEIGHT" "$SPIGOTDIR/server.properties" "="
+setFileProp "server-ip" "$SERVER_IP" "$SPIGOTDIR/server.properties" "="
+setFileProp "level-seed" "$LEVEL_SEED" "$SPIGOTDIR/server.properties" "="
+setFileProp "rcon.port" "$RCON_PORT" "$SPIGOTDIR/server.properties" "="
+setFileProp "gamemode" "$GAMEMODE" "$SPIGOTDIR/server.properties" "="
+setFileProp "server-port" "$SERVER_PORT" "$SPIGOTDIR/server.properties" "="
+setFileProp "allow-nether" "$ALLOW_NETHER" "$SPIGOTDIR/server.properties" "="
+setFileProp "enable-command-block" "$ENABLE_COMMAND_BLOCK" "$SPIGOTDIR/server.properties" "="
+setFileProp "enable-rcon" "$ENABLE_RCON" "$SPIGOTDIR/server.properties" "="
+setFileProp "enable-query" "$ENABLE_QUERY" "$SPIGOTDIR/server.properties" "="
+setFileProp "op-permission-level" "$OP_PERMISSION_LEVEL" "$SPIGOTDIR/server.properties" "="
+setFileProp "prevent-proxy-connections" "$PREVENT_PROXY_CONNECTIONS" "$SPIGOTDIR/server.properties" "="
+setFileProp "generator-settings" "$GENERATOR_SETTINGS" "$SPIGOTDIR/server.properties" "="
+setFileProp "resource-pack" "$RESOURCE_PACK" "$SPIGOTDIR/server.properties" "="
+setFileProp "level-name" "$LEVEL_NAME" "$SPIGOTDIR/server.properties" "="
+setFileProp "rcon.password" "$RCON_PASSWORD" "$SPIGOTDIR/server.properties" "="
+setFileProp "player-idle-timeout" "$PLAYER_IDLE_TIMEOUT" "$SPIGOTDIR/server.properties" "="
+setFileProp "motd" "$MOTD" "$SPIGOTDIR/server.properties" "="
+setFileProp "query.port" "$QUERY_PORT" "$SPIGOTDIR/server.properties" "="
+setFileProp "debug" "$DEBUG" "$SPIGOTDIR/server.properties" "="
+setFileProp "force-gamemode" "$FORCE_GAMEMODE" "$SPIGOTDIR/server.properties" "="
+setFileProp "hardcore" "$HARDCORE" "$SPIGOTDIR/server.properties" "="
+setFileProp "white-list" "$WHITE_LIST" "$SPIGOTDIR/server.properties" "="
+setFileProp "broadcast-console-to-ops" "$BROADCAST_CONSOLE_TO_OPS" "$SPIGOTDIR/server.properties" "="
+setFileProp "pvp" "$PVP" "$SPIGOTDIR/server.properties" "="
+setFileProp "spawn-npcs" "$SPAWN_NPCS" "$SPIGOTDIR/server.properties" "="
+setFileProp "generate-structures" "$GENERATE_STRUCTURES" "$SPIGOTDIR/server.properties" "="
+setFileProp "spawn-animals" "$SPAWN_ANIMALS" "$SPIGOTDIR/server.properties" "="
+setFileProp "snooper-enabled" "$SNOOPER_ENABLED" "$SPIGOTDIR/server.properties" "="
+setFileProp "difficulty" "$DIFFICULTY" "$SPIGOTDIR/server.properties" "="
+setFileProp "function-permission-level" "$FUNCTION_PERMISSION_LEVEL" "$SPIGOTDIR/server.properties" "="
+setFileProp "network-compression-threshold" "$NETWORK_COMPRESSION_THRESHOLD" "$SPIGOTDIR/server.properties" "="
+setFileProp "level-type" "$LEVEL_TYPE" "$SPIGOTDIR/server.properties" "="
+setFileProp "spawn-monsters" "$SPAWN_MONSTERS" "$SPIGOTDIR/server.properties" "="
+setFileProp "max-tick-time" "$MAX_TICK_TIME" "$SPIGOTDIR/server.properties" "="
+setFileProp "enforce-whitelist" "$ENFORCE_WHITELIST" "$SPIGOTDIR/server.properties" "="
+setFileProp "use-native-transport" "$USE_NATIVE_TRANSPORT" "$SPIGOTDIR/server.properties" "="
+setFileProp "max-players" "$MAX_PLAYERS" "$SPIGOTDIR/server.properties" "="
+setFileProp "resource-pack-sha1" "$RESOURCE_PACK_SHA1" "$SPIGOTDIR/server.properties" "="
+setFileProp "spawn-protection" "$SPAWN_PROTECTION" "$SPIGOTDIR/server.properties" "="
+setFileProp "online-mode" "$ONLINE_MODE" "$SPIGOTDIR/server.properties" "="
+setFileProp "allow-flight" "$ALLOW_FLIGHT" "$SPIGOTDIR/server.properties" "="
+setFileProp "max-world-size" "$MAX_WORLD_SIZE" "$SPIGOTDIR/server.properties" "="
+
+setFileProp "bungeecord" "$ENABLE_BUNGEECORD" "$SPIGOTDIR/spigot.yml" ": " "  "
 
 
+
+
+
+function writeFile {
+  local text=$1
+  local filePath=$2
+  echo $text > $filePath
+}
+
+writeFile "$OPS" "$SPIGOTDIR/ops.txt"
 
 
 

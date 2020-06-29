@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 check-env:
 ifeq ($(wildcard .env),)
 	@echo "Please create your .env file first, from .env_sample"
@@ -6,34 +7,54 @@ else
 include .env
 endif
 
+test:
+	read -p "Did you forget to modify the CHANGELOG? Want to abort? [Yy]: " -n 1 -r; \
+	if [[ ! $$REPLY =~ ^[Yy]$$ ]]; then \
+		echo -e "\nAborting....\n"; \
+		exit 1; \
+	else \
+		echo -e "\nContinuing....\n"; \
+	fi
+ 
+# Clear server data and rebuild the server
 reset: check-env
 	# TODO: add a warning, because it clear the data directory !
-	$(MAKE) clean
-	$(MAKE) build
-	$(MAKE) up
 
-clean:
+	./library.sh yesNoReset "Are you sure you want to reset all server ? All data will be lost, continue ? [y/N]"
+
+# Clear all server data
+clear:
 	# TODO: add a warning, because it clear the data directory !
-	sudo rm -rf data/*
+	./library.sh yesNoClear "All your server data will be lost! Continue ? [y/N]"
 
+# Go in the spigot docker container
 inside-sp:
 	docker-compose run spigotmc /bin/bash
 
+# Go in the bungeecord docker container
 inside-bc:
 	docker-compose run bungeecord /bin/bash
 
+# Start the server
 up:
 	docker-compose up
 
+# Start the server (detached)
 up-d:
 	docker-compose up -d
+
+up-slave:
+	docker-compose -f docker-compose-slave.yml up
+
+up-slave-d:
+	docker-compose -df docker-compose-slave.yml up
 
 # Build both Spigot and BungeeCord
 build: check-env
 	@echo "\n  :: Build Spigot container ::\n"
-	$(MAKE) build-sp
-	#echo "Build Bungeecord container"
-	#$(MAKE) build-bc
+	$(MAKE) rebuild-sp
+	# echo "Build Bungeecord container"
+	# $(MAKE) build-bc
 
 # Build Spigot but ensure a change in ./spigot/Dockerfile in order to reload
 # spigot.sh in the image — for development purpose.
@@ -60,11 +81,14 @@ cp-spigot: check-env build
 	docker cp tmpcntr:${$SPIGOTDIR}/spigot-${REV}.jar .
 	docker rm -f tmpcntr
 
+# Run spigot server only
 run: check-env
 	docker run -e EULA=true -it ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot
 
+# Enter in running spigo container
 exec: check-env
 	docker exec -it ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot /bin/bash
 
+# Docker push
 push: check-env
 	docker push ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:latest
