@@ -21,7 +21,7 @@ faire from scratch, c'est mieux !
 
 Open a terminal and type:
 ```
-curl -s -L https://raw.githubusercontent.com/saphirevert/docker-minecraft/install.sh | bash -s
+curl -s -L https://raw.githubusercontent.com/SaphireVert/docker-minecraft/master/install.sh | bash -s
 ```
 
 Note: this assumes that your are on a [Debian
