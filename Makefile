@@ -81,9 +81,9 @@ cp-spigot: check-env build
 	docker cp tmpcntr:${$SPIGOTDIR}/spigot-${REV}.jar .
 	docker rm -f tmpcntr
 
-# Run spigot server only
-run: check-env
-	docker run -e EULA=true -it ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot
+# Stop all the containers
+down: check-env
+	docker-compose down
 
 # Enter in running spigo container
 exec: check-env
