@@ -61,6 +61,16 @@ function ensure_dotenv_present {
   fi
 }
 
+function accept_the_EULA {
+  echo -n "Do you accept the Minecraft End User License Agreement (EULA) (y/n)?"
+  read eula
+  if [ "$eula" != "${eula#[Yy]}" ] ;then
+      sed -i "/EULA=/ c EULA=true" .env
+  else
+      exit 1
+  fi
+}
+
 function set_the_motd {
   read -p "Please enter the MOTD of the server [Default: A minecraft server]:" motd
   motd=${motd:-'A minecraft server'}
@@ -82,6 +92,7 @@ function run {
   check_group_docker
   clone_repos https://github.com/saphirevert/docker-minecraft
   ensure_dotenv_present
+  accept_the_EULA
   set_the_motd
   build_docker_image
   run_server
