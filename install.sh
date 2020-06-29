@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# See https://github.com/SaphireVert/scalewayMinecraftServ/issues/10
+# See https://github.com/SaphireVert/docker-minecraft/issues/10
 # TODO:
 # [x] Add a welcome header
 # [x] Check that all dependencies are installed, e.g. tmux, git, etc...
@@ -11,14 +11,14 @@
 # [x] finally, launch the server in a tmux process (see https://unix.stackexchange.com/questions/22682/how-to-launch-a-set-of-program-inside-tmux-or-gnome-terminal-within-a-script etc.)
 
 # The aim of this script is to be ran with the command
-# curl -s -L https://raw.githubusercontent.com/saphirevert/scalewayMinecraftServ/install.sh | bash -s
+# curl -s -L https://raw.githubusercontent.com/saphirevert/docker-minecraft/install.sh | bash -s
 # directly on the server on which one want to deploy a Minecraft server.
 #
 
 set -e -x
 
 function header {
-  echo -e "\e[32mHello from scalewayMinecraftServ"
+  echo -e "\e[32mHello from docker-minecraft"
 }
 
 function check_requirements {
@@ -43,11 +43,11 @@ function check_group_docker {
 
 function clone_repos {
   # TODO: confirm current path to clone repo
-  if ! [[ -d "scalewayMinecraftServ" ]]; then
+  if ! [[ -d "docker-minecraft" ]]; then
     git clone "$1" && cd "$(basename "$1" .git)"
     pwd
   else
-    cd scalewayMinecraftServ
+    cd docker-minecraft
     # TODO: it would be nice to `git pull`
   fi
 }
@@ -80,7 +80,7 @@ function run {
   header
   check_requirements git tmux docker docker-compose
   check_group_docker
-  clone_repos https://github.com/saphirevert/scalewayMinecraftServ
+  clone_repos https://github.com/saphirevert/docker-minecraft
   ensure_dotenv_present
   set_the_motd
   build_docker_image
