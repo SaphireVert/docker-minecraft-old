@@ -4,6 +4,7 @@ services:
     image: "${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:${REV}"
     ports:
       - "25567:25565"
+      - "25575:25575"
       # This has to be smarter, e.g. mount each file and sub_directories
     volumes:
       - ${PWD}/data/spigot/server:${SPIGOTDIR}
