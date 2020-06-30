@@ -15,7 +15,7 @@ test:
 	else \
 		echo -e "\nContinuing....\n"; \
 	fi
- 
+
 # Clear server data and rebuild the server
 reset: check-env
 	# TODO: add a warning, because it clear the data directory !
@@ -37,6 +37,7 @@ inside-bc:
 
 # Start the server
 up:
+	./sandbox.sh checkImage "saphirevert/docker-spigot"
 	docker-compose up
 
 # Start the server (detached)
@@ -87,7 +88,7 @@ down: check-env
 
 # Enter in running spigo container
 exec: check-env
-	docker exec -it ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot /bin/bash
+	docker exec -it ${DOCKER_HUB_USERNAME}/${IMG_PREFIX}spigot:${REV} /bin/bash
 
 # Docker push
 push: check-env

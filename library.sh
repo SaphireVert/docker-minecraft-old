@@ -16,6 +16,18 @@ function yesNoPrompt {
   fi
 }
 
+function yesNoBuild {
+  read -p "$2" -n 1 -r
+  if [[ $REPLY =~ ^[Yy]$ ]]
+  then
+    # Yes
+    make build
+  else
+    # No
+    tmpVar="No"
+  fi
+}
+
 function yesNoReset {
   yesNoPrompt $1 "$2"
   echo $tmpVar
@@ -51,4 +63,11 @@ fi
 if [[ "$1" == "yesNoClear" ]]
   then
     yesNoClear $1 "$2"
+fi
+
+if [[ "$1" == "checkImage" ]]
+  then
+    if [[ "$(docker images -q "$2" 2> /dev/null)" == "" ]]; then
+      yesNoBuild $1 "$2"
+    fi
 fi
