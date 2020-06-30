@@ -62,7 +62,8 @@ function ensure_dotenv_present {
 }
 
 function set_the_motd {
-  read -p "Please enter the MOTD of the server [Default: A minecraft server]:" motd
+  echo -n "Please enter the MOTD of the server [Default: A minecraft server]:"
+  read motd
   motd=${motd:-'A minecraft server'}
   echo $motd
   sed -i "/MOTD=/ c MOTD=$motd" .env
