@@ -61,11 +61,30 @@ function ensure_dotenv_present {
   fi
 }
 
+function accept_the_EULA {
+  echo -n "Do you accept the Minecraft End User License Agreement (EULA) (y/n)?"
+  read eula
+  if [ "$eula" != "${eula#[Yy]}" ] ;then
+      sed -i "/EULA=/ c EULA=true" .env
+  else
+      exit 1
+  fi
+}
+
 function set_the_motd {
-  read -p "Please enter the MOTD of the server [Default: A minecraft server]:" motd
+  echo -n "Please enter the MOTD of the server [Default: A minecraft server]:"
+  read motd
   motd=${motd:-'A minecraft server'}
   echo $motd
   sed -i "/MOTD=/ c MOTD=$motd" .env
+}
+
+function ask_for_ops {
+  echo -n "Please enter server's OPS separated by commas [Default: '']:"
+  read ops
+  ops=${ops:-''}
+  echo $ops
+  sed -i "/OPS=/ c OPS=$ops" .env
 }
 
 function build_docker_image {
@@ -82,7 +101,9 @@ function run {
   check_group_docker
   clone_repos https://github.com/saphirevert/docker-minecraft
   ensure_dotenv_present
+  accept_the_EULA
   set_the_motd
+  ask_for_ops
   build_docker_image
   run_server
 }
