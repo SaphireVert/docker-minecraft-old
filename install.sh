@@ -69,6 +69,14 @@ function set_the_motd {
   sed -i "/MOTD=/ c MOTD=$motd" .env
 }
 
+function ask_for_ops {
+  echo -n "Please enter server's OPS separated by commas [Default: '']:"
+  read ops
+  ops=${ops:-''}
+  echo $ops
+  sed -i "/OPS=/ c OPS=$ops" .env
+}
+
 function build_docker_image {
   make build-sp
 }
@@ -84,6 +92,7 @@ function run {
   clone_repos https://github.com/saphirevert/docker-minecraft
   ensure_dotenv_present
   set_the_motd
+  ask_for_ops
   build_docker_image
   run_server
 }
